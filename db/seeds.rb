@@ -6,16 +6,23 @@ require "faker"
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# User.destroy_all
+# Order.destroy_all
+
+
 1000.times do
   User.create(
-    created_at: Faker::Time.between_dates(from: Date.today - 30, to: Date.today, period: :all),
+    created_at: Faker::Time.between_dates(from: Date.today - 30, to: Date.today, period: :morning),
   )
 end
-# def fake_orders
+
+
+
 1000.times do
   user = User.all.sample
   Order.create(
-    created_at: Faker::Time.between_dates(from: Date.today - 30, to: Date.today, period: :all), user: user,
+    created_at: Faker::Time.between_dates(from: user.created_at + 30, to: Date.today, period: :evening), user: user,
   )
 end
+
 # end
